@@ -168,9 +168,24 @@ void loop() {
         //Serial.print("\t");
         //Serial.println(ypr[2] * 180/M_PI);
 
+        
+        
+        // /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ \\
+        //                                                                   \\
+        // Almost Everything above is part of the MPU6050_DMP6 example code  \\
+        //                                                                   \\
+        // /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ \\
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------------
+        
+        // \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \\
+        // BELOW IS IMPORTANT CODE WHICH IS NOT PART OF THE EXAMPLE CODE ANYMORE
+
+
+        //Rotation variables
         float zrot = ypr[2] *180/M_PI;
         float xrot = ypr[1] *180/M_PI;
-        
+
+        //Check if gesture for watering plant is made
         if(zrot > 60){
           startpos1 = true;
           WaterPlantTimer = millis()/1000;
@@ -185,6 +200,7 @@ void loop() {
           }
         }
 
+        //Check if gesture for getting the data is made
         if(abs(xrot) < 20){
           startpos2 = true;
           GetDataTimer = millis()/1000;
@@ -209,6 +225,7 @@ void loop() {
     }
 }
 
+//Water the plant!
 void WaterPlant(){
   if(WaterPlantSinglePrint){
     WaterPlantSinglePrint = false;
@@ -222,6 +239,7 @@ void WaterPlant(){
   }
 }
 
+//Get all the data
 void GetData(){
   if(GetDataSinglePrint){
     GetDataSinglePrint = false;
